@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+}
+
+.animate-show {
+  @apply opacity-0;
+  animation: show 0.15s ease-in-out forwards;
+}
+
+@keyframes show {
+  to {
+    opacity: 100;
+  }
+}
