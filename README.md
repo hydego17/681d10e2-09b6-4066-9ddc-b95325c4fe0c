@@ -13,7 +13,7 @@ The data is consumed from [Random User Generator API](https://randomuser.me). He
 ### Download or Clone this repository:
 
 ```sh
-git clone https://github.com/hydego17/ <your_folder_name>
+git clone https://github.com/hydego17/681d10e2-09b6-4066-9ddc-b95325c4fe0c <your_folder_name>
 ```
 
 ### Install all the dependencies
