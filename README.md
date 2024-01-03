@@ -6,7 +6,7 @@ This project was built using:
 - [**React Query**](https://tanstack.com/query/latest)
 - [**TailwindCSS**](https://tailwindcss.com) & [**shadcn/ui**](https://ui.shadcn.com/) for styling
 
-The data is consumed from [Random User Generator API](https://randomuser.me). Head over to their documentation for more details.
+The data is consumed from [Dummy JSON API](https://dummyjson.com/docs). Head over to their documentation for more details.
 
 ## Installation
 
