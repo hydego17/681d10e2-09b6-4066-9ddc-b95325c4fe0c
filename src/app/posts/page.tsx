@@ -12,6 +12,7 @@ export default async function PostsPage({ searchParams }: { searchParams: any })
     skip: 0,
     limit: 50,
   });
+  const totalPosts = data?.posts.length ?? 0;
 
   return (
     <div className='py-12 container max-w-screen-sm'>
@@ -24,10 +25,10 @@ export default async function PostsPage({ searchParams }: { searchParams: any })
 
         <div className='space-y-3'>
           <div className='text-xs text-right'>
-            Post{data.posts.length > 1 ? "s" : ""} Count: {data.posts.length}
+            Post{totalPosts > 1 ? "s" : ""} Count: {totalPosts}
           </div>
 
-          {data.posts.map((p, i) => (
+          {data?.posts.map((p, i) => (
             <Link
               href={`/posts/${p.id}`}
               key={p.id}

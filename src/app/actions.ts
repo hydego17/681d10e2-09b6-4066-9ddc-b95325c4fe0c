@@ -1,8 +1,16 @@
 "use server";
 
-import type { ApiResponse } from "@/types/api";
-import { addCommentSchema, PostComment, type CommentMultiple, type Post, type PostMultiple } from "@/types/schema";
-import { appConfig } from "@/config";
+import {
+  addCommentSchema,
+  commentMultipleSchema,
+  isZodError,
+  PostComment,
+  postMultipleSchema,
+  postSchema,
+  type CommentMultiple,
+  type Post,
+  type PostMultiple,
+} from "@/types/schema";
 import { createRequestUrl } from "@/lib/utils";
 
 export async function addComment(formData: FormData) {
@@ -31,38 +39,62 @@ export async function addComment(formData: FormData) {
   };
 }
 
-export async function getPosts(params = {}) {
-  const res: ApiResponse<PostMultiple> = await fetch(createRequestUrl(`${appConfig.CLIENT_URL}/api/posts`, params), {
-    next: { revalidate: 60 },
-  }).then((res) => res.json());
+export async function getPosts(params: Record<string, any>) {
+  let fetchUrl = "https://dummyjson.com/posts";
+  if (!!params.q) fetchUrl += `/search`;
 
-  if (!!res.errors) {
-    throw new Error(JSON.stringify(res.errors));
+  try {
+    const res = await fetch(createRequestUrl(fetchUrl, params), {
+      next: { revalidate: 60 },
+    }).then((res) => res.json());
+
+    // validate schema
+    await postMultipleSchema.parse(res);
+
+    return res as PostMultiple;
+    //
+  } catch (err) {
+    // throw validation error
+    if (isZodError(err)) {
+      throw new Error(JSON.stringify(err.issues));
+    }
   }
-
-  return res.data as PostMultiple;
 }
 
 export async function getPostDetail(id: string) {
-  const res: ApiResponse<Post> = await fetch(`${appConfig.CLIENT_URL}/api/posts/${id}`, {
-    next: { revalidate: 60 },
-  }).then((res) => res.json());
+  try {
+    const res = await fetch(`https://dummyjson.com/posts/${id}`, {
+      next: { revalidate: 60 },
+    }).then((res) => res.json());
 
-  if (!!res.errors) {
-    throw new Error(JSON.stringify(res.errors));
+    // validate schema
+    await postSchema.parse(res);
+
+    return res as Post;
+    //
+  } catch (err) {
+    // throw validation error
+    if (isZodError(err)) {
+      throw new Error(JSON.stringify(err.issues));
+    }
   }
-
-  return res.data as Post;
 }
 
 export async function getCommentsByPost(id: string) {
-  const res: ApiResponse<CommentMultiple> = await fetch(`${appConfig.CLIENT_URL}/api/comments/post/${id}`, {
-    next: { revalidate: 60 },
-  }).then((res) => res.json());
+  try {
+    const res = await fetch(`https://dummyjson.com/comments/post/${id}`, {
+      next: { revalidate: 60 },
+    }).then((res) => res.json());
 
-  if (!!res.errors) {
-    throw new Error(JSON.stringify(res.errors));
+    // validate schema
+    await commentMultipleSchema.parse(res);
+
+    return res as CommentMultiple;
+    //
+  } catch (err) {
+    // throw validation error
+    if (isZodError(err)) {
+      throw new Error(JSON.stringify(err.issues));
+    }
   }
-
-  return res.data as CommentMultiple;
 }
