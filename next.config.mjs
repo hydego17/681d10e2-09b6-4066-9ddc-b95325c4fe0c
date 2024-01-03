@@ -6,9 +6,6 @@ const allowedImageSrc = [];
 const config = {
   // Optional: support for Dockerfile
   // output: 'standalone',
-  experimental: {
-    serverActions: true,
-  },
 
   // Configure Next Image
   images: {
@@ -16,16 +13,6 @@ const config = {
     contentDispositionType: "attachment",
     minimumCacheTTL: 60 * 60 * 24, // 1 day
     domains: allowedImageSrc,
-  },
-
-  // Configure sitemap from API route
-  async rewrites() {
-    return [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
-    ];
   },
 
   async headers() {

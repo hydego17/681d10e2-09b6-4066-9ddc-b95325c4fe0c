@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     apple: "/favicon/apple-touch-icon.png",
   },
   manifest: `/favicon/site.webmanifest`,
-  metadataBase: new URL("/", siteConfig.url),
   creator: siteConfig.creator,
   publisher: siteConfig.creator,
   openGraph: {
