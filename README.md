@@ -4,9 +4,10 @@
 
 This project was built using:
 
-- [**Next.js**](https://nextjs.org)
+- [**Next.js 13**](https://nextjs.org) with server actions
 - [**React Query**](https://tanstack.com/query/latest)
 - [**TailwindCSS**](https://tailwindcss.com) & [**shadcn/ui**](https://ui.shadcn.com/) for styling
+- [**Vitest**](https://vitest.dev/) & [**RTL**](https://testing-library.com/docs/react-testing-library/intro/) for unit testing
 
 The data is consumed from [Dummy JSON API](https://dummyjson.com/docs). Head over to their documentation for more details.
 
@@ -40,6 +41,15 @@ yarn install
 
 ```sh
 pnpm dev
+```
+
+### Run the test:
+
+**Note:** as of now the Next.js isnt supported in cypress, so unit testing with vitest
+is the only viable options or now, despite the current [issue](https://github.com/testing-library/react-testing-library/issues/1209) of RTL with server components (still going on).
+
+```sh
+pnpm test
 ```
 
 Go to http://localhost:3000/.

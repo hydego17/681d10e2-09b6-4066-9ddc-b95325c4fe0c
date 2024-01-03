@@ -1,11 +1,13 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
 import { PostComment } from "@/types/schema";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { addComment } from "@/app/actions";
+
+import { SubmitButton } from "./submit-button";
 
 type Props = {
   postId: number;
@@ -14,8 +16,7 @@ type Props = {
 };
 
 export default function AddCommentForm({ postId, onClose, onCommentAdded }: Props) {
-  const { pending } = useFormStatus();
-
+  // invoke server action within form state
   const [state, formAction] = useFormState(async (prevState: any, formData: FormData) => {
     const { data, errors } = await addComment(formData);
 
@@ -23,7 +24,6 @@ export default function AddCommentForm({ postId, onClose, onCommentAdded }: Prop
     if (!!data) {
       onCommentAdded(data);
     }
-
     return { data, errors };
   }, null);
 
@@ -40,9 +40,8 @@ export default function AddCommentForm({ postId, onClose, onCommentAdded }: Prop
           <Button type='button' size='sm' variant='outline' onClick={onClose}>
             Cancel
           </Button>
-          <Button type='submit' size='sm' variant='default' disabled={pending}>
-            {pending ? "Loading..." : "Submit"}
-          </Button>
+
+          <SubmitButton>Submit</SubmitButton>
         </div>
       </form>
     </div>

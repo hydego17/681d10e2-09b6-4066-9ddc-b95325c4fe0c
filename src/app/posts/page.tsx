@@ -6,9 +6,9 @@ import SearchBar from "@/components/search-bar";
 
 import { getPosts } from "../actions";
 
-export default async function PostsPage({ searchParams }: { searchParams: any }) {
+export default async function PostsPage({ searchParams }: { searchParams?: any }) {
   const data = await getPosts({
-    q: searchParams["q"] || "",
+    q: searchParams?.["q"] || "",
     skip: 0,
     limit: 50,
   });
