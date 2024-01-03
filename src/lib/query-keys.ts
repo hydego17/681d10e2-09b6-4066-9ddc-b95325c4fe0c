@@ -3,6 +3,8 @@
  */
 export const queryKeys = {
   posts: "Posts",
+  postDetail: "Post Detail",
+  postComments: "Post Comments",
   products: "Products",
 
   // ...add more stuff here

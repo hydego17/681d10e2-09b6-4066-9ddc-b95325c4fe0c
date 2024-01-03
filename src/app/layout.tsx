@@ -7,7 +7,9 @@ import { ClientProviders } from "@/lib/client-providers";
 import { DayJsProvider } from "@/lib/dayjs";
 import { fontInter } from "@/lib/fonts";
 import { ReactQueryProvider } from "@/lib/react-query-client";
+import { ThemeProvider } from "@/lib/theme-provider";
 import { cn } from "@/lib/utils";
+import { AppLayout } from "@/components/app-layout";
 
 export const metadata: Metadata = {
   title: {
@@ -47,14 +49,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const globalData = {};
 
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
       </head>
       <body className={cn(fontInter.className)}>
         <ReactQueryProvider dehydratedState={globalData}>
-          <>{children}</>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+            <AppLayout>{children}</AppLayout>
+          </ThemeProvider>
         </ReactQueryProvider>
         <DayJsProvider />
         <ClientProviders />

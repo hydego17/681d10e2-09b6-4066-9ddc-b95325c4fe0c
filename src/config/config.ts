@@ -2,6 +2,8 @@ const isDev = process.env.NODE_ENV === "development";
 
 const APP_SECRET = "SomeSecretHere";
 
+const CLIENT_URL = isDev ? "http://localhost:3000" : `https://${process.env.VERCEL_URL}`;
+
 const DOMAIN = "";
 
 /**
@@ -10,6 +12,7 @@ const DOMAIN = "";
 export const appConfig = {
   DOMAIN,
   APP_SECRET,
+  CLIENT_URL,
 };
 
 /**
@@ -20,5 +23,5 @@ export const siteConfig = {
   title: "Hydego Starter",
   description: "",
   creator: "",
-  url: isDev ? "http://localhost:3771" : `https://${appConfig.DOMAIN}`,
+  url: isDev ? "http://localhost:3000" : `https://${appConfig.DOMAIN}`,
 };

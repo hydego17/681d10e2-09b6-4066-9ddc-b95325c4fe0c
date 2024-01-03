@@ -1,20 +1,27 @@
 import Link from "next/link";
 
-export default function Home() {
-  return (
-    <main className='min-h-screen centered bg-slate-100'>
-      <div>
-        <h1 className='text-3xl font-bold text-center'>Next.js Sarter</h1>
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
-        <div className='mt-8 flex gap-2'>
-          <Link href='/server' className='bg-black px-4 py-2 rounded-lg text-white'>
-            Server Component
-          </Link>
-          <Link href='/client' className='bg-black px-4 py-2 rounded-lg text-white'>
-            Client (Hydration)
+export default function HomePage() {
+  return (
+    <div className='py-12 container max-w-screen-sm'>
+      <section className='min-h-[300px] flex flex-col justify-center items-center border rounded-lg'>
+        <h1 className='text-2xl font-bold'>Imagine a landing page</h1>
+
+        <div className='mt-4'>
+          <Link
+            href='/posts'
+            className={cn(
+              buttonVariants({
+                variant: "default",
+              })
+            )}
+          >
+            See All Posts
           </Link>
         </div>
-      </div>
-    </main>
+      </section>
+    </div>
   );
 }
